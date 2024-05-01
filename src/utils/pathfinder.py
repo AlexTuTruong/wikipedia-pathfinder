@@ -2,12 +2,6 @@ from collections import deque
 from scraper import get_neighbours
 
 
-STARTURL = 'https://en.wikipedia.org/wiki/Kim_Jong_Un'
-ENDURL = 'https://en.wikipedia.org/wiki/Hot_dog'
-ENDURL2 = 'https://en.wikipedia.org/wiki/Workers%27_Party_of_Korea'
-ENDURL3 = 'https://en.wikipedia.org/wiki/National_Basketball_Association'
-ENDURL4 = 'https://en.wikipedia.org/wiki/Nuno_Gomes_Nabiam'
-
 def get_shortest_path(start_url, target_url):
     """Gets the shortest path between two wikipedia articles"""
 
@@ -39,8 +33,22 @@ def get_shortest_path(start_url, target_url):
 
     return None
 
-found_path = get_shortest_path(STARTURL, ENDURL)
 
-formatted_path = ' -> '.join([link.lstrip('https://en.wikipedia.org/wiki/') for link in found_path])
+def main():
+    """Main method to test the pathfinder"""
 
-print(formatted_path)
+    start_url = 'https://en.wikipedia.org/wiki/Kim_Jong_Un'
+    end_url = 'https://en.wikipedia.org/wiki/Hot_dog'
+    end_url2 = 'https://en.wikipedia.org/wiki/Workers%27_Party_of_Korea'
+    end_url3 = 'https://en.wikipedia.org/wiki/National_Basketball_Association'
+
+    found_path = get_shortest_path(start_url, end_url2)
+    formatted_path = ' -> '.join(
+        [link.lstrip('https://en.wikipedia.org/wiki/') for link in found_path]
+    )
+
+    print(formatted_path)
+
+
+if __name__ == "__main__":
+    main()
