@@ -36,7 +36,7 @@ def get_article_name(url):
 
         if title_tag:
             title = title_tag.get_text()
-            return title.rstrip(' - Wikipedia')
+            return title[:-len(' - Wikipedia')]
         else:
             return None
     else:
@@ -46,7 +46,7 @@ def get_article_name(url):
 def main():
     """Main method to test the scraper"""
 
-    test_url = 'https://en.wikipedia.org/wiki/Kim_Jong_Un'
+    test_url = 'https://en.wikipedia.org/wiki/Workers%27_Party_of_Korea'
     print(get_neighbours(test_url))
     print(get_article_name(test_url))
 
