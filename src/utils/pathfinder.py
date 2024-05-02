@@ -1,4 +1,5 @@
 from collections import deque
+import argparse
 from scraper import get_neighbours, get_article_name
 
 
@@ -42,12 +43,15 @@ def get_shortest_path(start_url, target_url, max_depth):
 def main():
     """Main method to test the pathfinder"""
 
-    start_url = 'https://en.wikipedia.org/wiki/Kim_Jong_Un'
-    end_url = 'https://en.wikipedia.org/wiki/Hot_dog'
-    end_url2 = 'https://en.wikipedia.org/wiki/Workers%27_Party_of_Korea'
-    end_url3 = 'https://en.wikipedia.org/wiki/National_Basketball_Association'
+    parser = argparse.ArgumentParser(description='Find the shortest path between two Wikipedia articles.')
 
-    found_path = get_shortest_path(start_url, end_url, 6)
+    parser.add_argument('start_url', type=str, help='URL of the starting Wikipedia article')
+    parser.add_argument('target_url', type=str, help='URL of the target Wikipedia article')
+    parser.add_argument('--max-depth', type=int, default=6, help='Maximum depth for BFS (default: 6)')
+
+    args = parser.parse_args()
+
+    found_path = get_shortest_path(args.start_url, args.target_url, args.max_depth)
     formatted_path = ' -> '.join(
         [get_article_name(link) for link in found_path]
     )

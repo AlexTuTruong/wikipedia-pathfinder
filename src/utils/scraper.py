@@ -1,5 +1,6 @@
-from bs4 import BeautifulSoup
+import argparse
 import requests
+from bs4 import BeautifulSoup
 
 
 def get_neighbours(url):
@@ -46,9 +47,13 @@ def get_article_name(url):
 def main():
     """Main method to test the scraper"""
 
-    test_url = 'https://en.wikipedia.org/wiki/Workers%27_Party_of_Korea'
-    print(get_neighbours(test_url))
-    print(get_article_name(test_url))
+    parser = argparse.ArgumentParser(description='Find the shortest path between two Wikipedia articles.')
+
+    parser.add_argument('url', type=str, help='URL of a Wikipedia article')
+
+    args = parser.parse_args()
+    print(get_neighbours(args.url))
+    print(get_article_name(args.url))
 
 
 if __name__ == "__main__":
