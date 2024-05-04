@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1 class="text-3xl font-bold underline text-clifford">
-        Hello world!
-    </h1>
+    <div class="flex items-center justify-center content-center h-24 w-screen bg-zinc-700">
+        <img class="object-scale-down h-14 w-14 mx-10" src="/static/images/wikipedia-logo.png" alt="Wikipedia logo">
+        <header class="text-center text-4xl">Wikipedia pathfinder</header>
+        <img class="object-scale-down h-14 w-14 mx-10" src="/static/images/pathfinder.png" alt="Pathfinder image">
+    </div>
+    <div class="flex-1 grid gap-6 mb-6 size-11/12 md:grid-cols-2 place-items-center h-full w-screen px-14 pt-14">
+        <div class="w-full">
+            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Start article URL</label>
+            <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://en.wikipedia.org/wiki/United_States" required />
+        </div>
+        <div class="w-full">
+            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Target article URL</label>
+            <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="https://en.wikipedia.org/wiki/Hot_dog" required />
+        </div>
+    </div>
+    <div class="flex items-center justify-center content-center w-screen">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Find Path</button>
+    </div>
 {% endblock %}
