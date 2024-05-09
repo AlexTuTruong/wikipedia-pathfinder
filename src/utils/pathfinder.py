@@ -1,43 +1,51 @@
 from collections import deque
 import argparse
-from scraper import get_neighbours, get_article_name
+from .scraper import get_neighbours, get_article_name
 
 
-def get_shortest_path(start_url, target_url, max_depth):
-    """Gets the shortest path between two wikipedia articles"""
+class Pathfinder:
+    def __init__(self):
+        self.path = []
+        self.solutions = []
 
-    visited = set()
-    queue = deque([(start_url, [start_url], 0)])
+    def get_shortest_path(self, start_url, target_url, max_depth):
+        """Gets the shortest path between two wikipedia articles"""
 
-    while queue:
-        current_url, path, depth = queue.popleft()
-        print('Current path: ', path)
-        print('Current depth:', depth)
+        visited = set()
+        queue = deque([(start_url, [start_url], 0)])
 
-        if depth > max_depth:
-            return None
+        while queue:
+            current_url, self.path, depth = queue.popleft()
+            print('Current path: ', self.path)
+            print('Current Solutions', self.solutions)
+            print('Current depth:', depth)
 
-        if current_url == target_url:
-            return path
+            if depth > max_depth:
+                return None
 
-        if current_url in visited:
-            continue
+            if current_url == target_url:
+                self.path.append(target_url)
+                return self.path
 
-        visited.add(current_url)
-        neighbors = get_neighbours(current_url)
+            if current_url in visited:
+                continue
 
-        if target_url in neighbors:
-            path.append(target_url)
-            return path
+            visited.add(current_url)
+            neighbors = get_neighbours(current_url)
 
-        if neighbors is None:
-            continue
+            if target_url in neighbors:
+                current_solution = self.path.copy()
+                current_solution.append(target_url)
+                self.solutions.append(current_solution)
 
-        for neighbor in neighbors:
-            if neighbor not in visited:
-                queue.append((neighbor, path + [neighbor], depth + 1))
+            if neighbors is None:
+                continue
 
-    return None
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    queue.append((neighbor, self.path + [neighbor], depth + 1))
+
+        return None
 
 
 def main():
@@ -51,12 +59,18 @@ def main():
 
     args = parser.parse_args()
 
-    found_path = get_shortest_path(args.start_url, args.target_url, args.max_depth)
+    print(args.start_url, args.target_url, args.max_depth)
+
+    pf = Pathfinder()
+
+    found_path = pf.get_shortest_path(args.start_url, args.target_url, args.max_depth)
     formatted_path = ' -> '.join(
         [get_article_name(link) for link in found_path]
     )
 
     print(formatted_path)
+    print('Other possible paths:')
+    print(pf.solutions)
 
 
 if __name__ == "__main__":
