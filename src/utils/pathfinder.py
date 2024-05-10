@@ -1,12 +1,12 @@
 from collections import deque
-import argparse
-from .scraper import get_neighbours, get_article_name
+from .scraper import get_neighbours
 
 
 class Pathfinder:
     def __init__(self):
         self.path = []
         self.solutions = []
+        self.cli = False
 
     def get_shortest_path(self, start_url, target_url, max_depth):
         """Gets the shortest path between two wikipedia articles"""
@@ -16,9 +16,11 @@ class Pathfinder:
 
         while queue:
             current_url, self.path, depth = queue.popleft()
-            # print('Current path: ', self.path)
-            # print('Current Solutions', self.solutions)
-            # print('Current depth:', depth)
+
+            if self.cli:
+                print('Current path: ', self.path)
+                print('Current Solutions', self.solutions)
+                print('Current depth:', depth)
 
             if depth > max_depth:
                 return None
@@ -45,32 +47,3 @@ class Pathfinder:
                     queue.append((neighbor, self.path + [neighbor], depth + 1))
 
         return None
-
-
-def main():
-    """Main method to test the pathfinder"""
-
-    parser = argparse.ArgumentParser(description='Find the shortest path between two Wikipedia articles.')
-
-    parser.add_argument('start_url', type=str, help='URL of the starting Wikipedia article')
-    parser.add_argument('target_url', type=str, help='URL of the target Wikipedia article')
-    parser.add_argument('--max-depth', type=int, default=6, help='Maximum depth for BFS (default: 6)')
-
-    args = parser.parse_args()
-
-    print(args.start_url, args.target_url, args.max_depth)
-
-    pf = Pathfinder()
-
-    found_path = pf.get_shortest_path(args.start_url, args.target_url, args.max_depth)
-    formatted_path = ' -> '.join(
-        [get_article_name(link) for link in found_path]
-    )
-
-    print(formatted_path)
-    print('Other possible paths:')
-    print(pf.solutions)
-
-
-if __name__ == "__main__":
-    main()
