@@ -21,8 +21,19 @@
             <button id="findPath" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Find Path</button>
         </div>
     </form>
-    <div class="flex items-center justify-center content-center w-screen my-20">
-        <h1 id="consoleOutput" class="text-white">Finding path...</h1>
+    <div class="flex items-center justify-center content-center w-screen mt-10">
+        <h1 class="text-white font-extrabold">Best path:</h1>
+    </div>
+    <div class="flex items-center justify-center content-center w-screen mb-14">
+        <h1 id="pathOutput" class="text-white">Finding path...</h1>
+    </div>
+    <div>
+        <div class="flex items-center justify-center content-center">
+            <h1 class="text-white font-bold">All Possible paths:</h1>
+        </div>
+        <ul class="text-white" id="possiblePaths">
+
+        </ul>
     </div>
     <script src="../static/js/index.js"></script>
 {% endblock %}
