@@ -5,7 +5,7 @@ var socket = io.connect(location.protocol + '//' + location.hostname + ':' + loc
     })
 
     socket.on('paths', function (output) {
-        document.getElementById('pathOutput').innerText = output;
+        document.getElementById('pathOutput').innerHTML = output;
     });
 
     socket.on('solutions', function (output) {
@@ -20,7 +20,6 @@ document.getElementById('findPath').addEventListener('click', function() {
         targetURL: document.getElementById('target_article').value
     }
 
-    // Fetch options
     var options = {
         method: 'POST',
         headers: {
@@ -28,18 +27,11 @@ document.getElementById('findPath').addEventListener('click', function() {
         },
         body: JSON.stringify(formData)
     };
-
-    // Fetch POST request to the Flask endpoint
     fetch('/find-path', options)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            // return response.json();  // Parse response JSON
-        })
-        .then(data => {
-            console.log('Response received:', data);
-            // Handle the response data as needed
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

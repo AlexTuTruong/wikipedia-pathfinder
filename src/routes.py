@@ -44,16 +44,27 @@ def handle_disconnect():
 def get_paths():
     global display_path
     while display_path:
-        formatted_path = ' -> '.join(
-            [link.removeprefix('https://en.wikipedia.org') for link in pf.path]
-        )
-        socketio.emit('paths', formatted_path)
+
+        current_formatted_path = []
+        for link in pf.path:
+            strippedlink = link.removeprefix('https://en.wikipedia.org')
+            current_formatted_path.append(
+                f'<a href="{link}" target="_blank" class="hover:underline">{strippedlink}</a>'
+            )
+
+        cleaned_currrent_path = ' -> '.join(link for link in current_formatted_path)
+        socketio.emit('paths', cleaned_currrent_path)
 
         unformatted_paths = pf.solutions.copy()
         sols = ''
         for paths in unformatted_paths:
-            cleaned_path = ' -> '.join(path.removeprefix('https://en.wikipedia.org') for path in paths)
+            formatted_path = []
+            for url in paths:
+                strippedurl = url.removeprefix('https://en.wikipedia.org')
+                formatted_path.append(f'<a href="{url}" target="_blank" class="hover:underline">{strippedurl}</a>')
+
+            cleaned_path = ' -> '.join(path for path in formatted_path)
             sols += f'<li>{cleaned_path}</li>'
 
         socketio.emit('solutions', sols)
-        time.sleep(0.25)
+        time.sleep(0.35)
