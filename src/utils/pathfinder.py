@@ -16,15 +16,14 @@ class Pathfinder:
 
         while queue:
             current_url, self.path, depth = queue.popleft()
-            print('Current path: ', self.path)
-            print('Current Solutions', self.solutions)
-            print('Current depth:', depth)
+            # print('Current path: ', self.path)
+            # print('Current Solutions', self.solutions)
+            # print('Current depth:', depth)
 
             if depth > max_depth:
                 return None
 
             if current_url == target_url:
-                self.path.append(target_url)
                 return self.path
 
             if current_url in visited:
