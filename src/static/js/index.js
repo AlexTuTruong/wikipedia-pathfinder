@@ -13,8 +13,13 @@ var socket = io.connect(location.protocol + '//' + location.hostname + ':' + loc
     })
 
 
-document.getElementById('findPath').addEventListener('click', function() {
+document.getElementById('findPath').addEventListener('click', function(event) {
     
+    const button = event.target
+
+    button.innerText = 'Searching...'
+    button.disabled = true;
+
     const formData = {
         startURL: document.getElementById('start_article').value,
         targetURL: document.getElementById('target_article').value
@@ -32,6 +37,8 @@ document.getElementById('findPath').addEventListener('click', function() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            button.innerText = 'Find Path'
+            button.disabled = false;
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
