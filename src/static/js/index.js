@@ -4,9 +4,13 @@ var socket = io.connect(location.protocol + '//' + location.hostname + ':' + loc
         console.log('Connected to server.')
     })
 
-    socket.on('number', function (output) {
-        document.getElementById('consoleOutput').innerText = output;
+    socket.on('paths', function (output) {
+        document.getElementById('pathOutput').innerText = output;
     });
+
+    socket.on('solutions', function (output) {
+        document.getElementById('possiblePaths').innerHTML = output;
+    })
 
 
 document.getElementById('findPath').addEventListener('click', function() {
