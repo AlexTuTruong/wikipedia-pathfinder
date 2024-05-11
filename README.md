@@ -37,6 +37,14 @@ Wikipedia logo credit: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia_logo)
 
 Pathfinder image credit: [Opallolo](https://www.redbubble.com/people/opallolo/shop)
 
+
+## Image
+![WikiPathfinder](https://github.com/AlexTuTruong/wikipedia-pathfinder/assets/53573114/99422ce8-2f96-4f52-8f98-51e377e55959)
+
+Input field on the left will take the start url, input field on the right will take the target URL.
+
+A list of encountered paths will be placed on the bottom portion of the page
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
