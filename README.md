@@ -15,8 +15,8 @@ In addition to the front end, the pathfinder can be access via CLI using argumen
     * HTTPS: `git clone https://github.com/AlexTuTruong/wikipedia-pathfinder.git`
     * SSH: `git clone git@github.com:AlexTuTruong/wikipedia-pathfinder.git`
     * Github CLI: `gh repo clone AlexTuTruong/wikipedia-pathfinder`
-* Navigate to the src folder in this repository
-    * `cd /path/to/folder/`
+* Navigate to the root folder in this repository
+    * `cd /path/to/folder/wikipedia-pathfinder`
 * Install the dependencies
     * `pip install -r requirements.txt`
 * Run the application
